@@ -4,18 +4,23 @@ from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
+
 class Category(models.Model):
     """
     Model acting as categories linked to each Recipe.
     """
     recipe_category = models.CharField('Category', max_length=40, blank=False)
     slug = models.SlugField(max_length=200, unique=True)
+    category_name = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
         ordering = ['recipe_category']
 
     def __str__(self):
         return self.recipe_category
+
+    def get_category_name(self):
+        return self.category_name
 
 
 class Recipe(models.Model):
@@ -26,7 +31,7 @@ class Recipe(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_recipes")
     updated_on = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="categories")
+    category = models.ManyToManyField('Category', blank=True)
     cooking_time = models.IntegerField()
     ingredients = models.TextField()
     describtion = models.TextField()
