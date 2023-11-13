@@ -34,7 +34,7 @@ class Recipe(models.Model):
     category = models.ManyToManyField('Category', blank=True)
     cooking_time = models.IntegerField()
     ingredients = models.TextField()
-    describtion = models.TextField()
+    description = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
