@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Recipe, Comment
+from .models import Recipe, Comment, Category
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -34,3 +34,13 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(approved=True)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    """
+    This class adds fields from the Category model to the admin
+    panel
+    """
+    list_display = ('category_name',)
+   

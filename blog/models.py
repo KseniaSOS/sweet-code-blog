@@ -9,17 +9,12 @@ class Category(models.Model):
     """
     Model acting as categories linked to each Recipe.
     """
-    recipe_category = models.CharField('Category', max_length=40, blank=False)
-    slug = models.SlugField(max_length=200, unique=True)
-    category_name = models.CharField(max_length=50, null=True, blank=True)
-
+    category_name = models.CharField('Category', max_length=40, blank=False)
+        
     class Meta:
-        ordering = ['recipe_category']
+        ordering = ['category_name']
 
     def __str__(self):
-        return self.recipe_category
-
-    def get_category_name(self):
         return self.category_name
 
 
