@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Pacifico&display=swap');
+
+body {
+    background-color: bisque;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'PT Serif', serif;
+    font-weight: 400;
+}
+
+/* Navigation */
+
+navbar-brand {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+}
+
+.navbar-nav {
+    font-family: 'PT Serif', serif;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+/* Carousel */
+
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: initial;
+    text-shadow: 2px 2px black;
+}
+
+/* Buttons */
+
+footer p {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+}
