@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Pacifico&display=swap');
 
 body {
-    background-color: bisque;
+    background-color: #DDC5A2;
 }
 
 h1,
@@ -15,11 +15,6 @@ h6 {
 }
 
 /* Navigation */
-
-navbar-brand {
-    font-family: 'Pacifico', cursive;
-    font-weight: 400;
-}
 
 .navbar-nav {
     font-family: 'PT Serif', serif;
