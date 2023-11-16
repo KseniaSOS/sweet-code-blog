@@ -23,6 +23,7 @@ h6 {
     text-transform: uppercase;
 }
 
+
 /* Carousel */
 
 .carousel-caption {
@@ -48,25 +49,22 @@ h6 {
 .card-text {
     color: #523634;
 }
-/* Footer */
 
-footer {
-    background-color: #ddc2a5;
-}
+/* Footer */
 
 footer p {
     font-family: 'Pacifico', cursive;
     font-weight: 400;
     font-size: 25px;
     color: #523634;
-
 }
 
 footer .btn {
     border: none;
+    color: #523634;
 }
 
 .fa-brands {
-    font-size: 25px;
+    font-size: 40px;
 }
 

@@ -21,44 +21,44 @@
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand logo" style="color: #301B28; font-family: 'Pacifico', cursive; font-size: 23px;" href="{% url 'home'%}">Sweet Code Blog</a>
+            <a class="navbar-brand" style="color: #301B28; font-family: 'Pacifico', cursive; font-size: 23px;" href="{% url 'home'%}">Sweet Code Blog</a>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page"href="{% url 'home' %}">Home</a>
+                        <a class="nav-link" style="color: #301B28;" aria-current="page"href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="">About</a>
+                        <a class="nav-link" style="color: #301B28;" href="">About</a>
                     </li> 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" style="color: #301B28;" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Category
                         </a>
                         <ul class="dropdown-menu">
                             <!-- iterates through category on website and filters based on selection -->
                             {% for category in category_list %}
                             <li class="nav-item">
-                                <a href="{% url 'home' %}?category={{category_name.category}}" class="dropdown-item">{{ category_name.category }}</a>
+                                <a href="{% url 'home' %}?category={{category_name.category}}" style="color: #301B28;" class="dropdown-item">{{ category_name.category }}</a>
                             </li>
                             {% endfor %}
                         </ul>
 
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" style="color: #301B28;" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             {{ user }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="">Create New Recipe</a></li>
-                            <li><a class="dropdown-item" href="">View My Recipies</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="">Create New Recipe</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="">View My Recipies</a></li>
 
                             {% if request.user.is_superuser %}
-                            <li><a class="dropdown-item" href="">Admin Area</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="">Admin Area</a></li>
                             {% endif %}
 
-                            <li><a class="dropdown-item" href="">Log Out</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="">Log Out</a></li>
                         </ul>
                     </li>
 
