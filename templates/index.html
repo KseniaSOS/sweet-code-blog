@@ -71,15 +71,14 @@
                 <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="Recipe image">
                 {% endif %}
                 <div class="card-body">
-                    <h6 class="text-muted text-uppercase">By {{ recipe.author }} |
-                        {{ recipe.date_created_on|date:"Y-m-d" }} <i
-                            class="fa-solid fa-thumbs-up"></i>{{ recipe.number_of_likes }}</h6>
+                    <h6 class="text-muted">By {{ recipe.author }} |
+                        {{ recipe.date_created_on|date:"Y-m-d" }} <i class="fa-solid fa-thumbs-up"></i>
+                        {{ recipe.number_of_likes }}</h6>
                     <h5 class="card-title text-uppercase">{{ recipe.title }}</h5>
                     <div class="text-muted">
-                        <p class="card-text mb-3 fragment">{{ post.excerpt }}</p>
+                        <p class="card-text mb-3 fragment">{{ recipe.excerpt }}</p>
                         <p class="card-text">
-                            <a href="" class="btn btn-outline-secondary btn-sm">Read
-                                More</a>
+                            <a href="" class="btn btn-outline-secondary btn-sm">View Recipe</a>
                             {% if user.id == post.author.id %}
                             <a href="" class="btn btn-outline-secondary btn-sm">Update</a>
                             <a href="" class="btn btn-danger btn-sm">Delete</a>
@@ -88,17 +87,13 @@
                     </div>
                 </div>
             </div>
-            {% if forloop.counter|divisibleby:3 %}
         </div>
-        <div class="row">
-            {% endif %}
-            {% endfor %}
-        </div>
+        {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row">
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 
-
-
-</div>
-
-{%endblock%}
+{% endblock content %}

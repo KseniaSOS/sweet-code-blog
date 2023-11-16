@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Pacifico&display=swap');
 
 body {
-    background-color: #DDC5A2;
+    background-color: #ffffff;
 }
 
 h1,
@@ -12,6 +12,7 @@ h5,
 h6 {
     font-family: 'PT Serif', serif;
     font-weight: 400;
+    color: #523634;
 }
 
 /* Navigation */
@@ -25,15 +26,47 @@ h6 {
 /* Carousel */
 
 .carousel-caption {
-    top: 50%;
+    top: 30%;
     transform: translateY(-50%);
     bottom: initial;
-    text-shadow: 2px 2px black;
+    text-shadow: 2px 2px #523634;
+}
+/* Cards */
+
+.card-body {
+    background-color: #ffeedc;
 }
 
+
 /* Buttons */
+.btn {
+    color:#b6452c;
+    font-size: 18px;    
+    border-color: #523634;
+}
+
+.card-text {
+    color: #523634;
+}
+/* Footer */
+
+footer {
+    background-color: #ddc2a5;
+}
 
 footer p {
     font-family: 'Pacifico', cursive;
     font-weight: 400;
+    font-size: 25px;
+    color: #523634;
+
 }
+
+footer .btn {
+    border: none;
+}
+
+.fa-brands {
+    font-size: 25px;
+}
+
