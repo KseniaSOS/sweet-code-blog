@@ -45,8 +45,8 @@
                             <!-- iterates through category on website and filters based on selection -->
                             {% for category in category_list %}
                             <li class="nav-item">
-                                <a href="{% url 'home' %}?category={{category_name.category}}" style="color: #301B28;"
-                                    class="dropdown-item">{{ category_name.category }}</a>
+                                <a href="" style="color: #301B28;"
+                                    class="dropdown-item">{{ category.category_name }}</a>
                             </li>
                             {% endfor %}
                         </ul>

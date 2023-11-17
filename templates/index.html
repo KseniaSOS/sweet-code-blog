@@ -7,7 +7,7 @@
     <div class="row">
         {% for recipe in recipe_list %}
         <div class="col-lg-3 mb-4">
-            <div class="card border-secondary">
+            <div class="card border-secondary shadow-sm p-3 mb-5 bg-body rounded border">
                 {% if "placeholder" in recipe.featured_image.url %}
                 <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143581/default_image_hgtqbs.png"
                     alt="A plate with macarons">
