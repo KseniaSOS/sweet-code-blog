@@ -2,68 +2,12 @@
 
 {% block content %}
 
-<!-- Hero image and call to action is displayed only for users who are not logged in -->
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143583/cakes-3_mjkt6l.png"
-                class="d-block w-100" alt="Small desserts">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="display-4 text-uppercase">welcome to the sweet blog</h5>
-                <div class="text-left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus repudiandae
-                        necessitatibus
-                        laborum accusamus vero nihil iste, nam excepturi quod culpa ad. Maxime non veniam eaque
-                        laboriosam beatae repellat quam! Quos.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143581/cakes-1_d4ged7.png"
-                class="d-block w-100" alt="Small desserts">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="display-4 text-uppercase">welcome to the sweet blog</h5>
-                <div class="text-left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus repudiandae
-                        necessitatibus
-                        laborum accusamus vero nihil iste, nam excepturi quod culpa ad. Maxime non veniam eaque
-                        laboriosam beatae repellat quam! Quos.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143478/cakes_c5emuc.png"
-                class="d-block w-100" alt="Small desserts">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="display-4 text-uppercase">welcome to the sweet blog</h5>
-                <div class="text-left">
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus repudiandae
-                        necessitatibus
-                        laborum accusamus vero nihil iste, nam excepturi quod culpa ad. Maxime non veniam eaque
-                        laboriosam beatae repellat quam! Quos.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
 <!-- All recipes -->
 <div class="container-fluid p-5">
     <div class="row">
         {% for recipe in recipe_list %}
         <div class="col-lg-3 mb-4">
-            <div class="card">
+            <div class="card border-secondary">
                 {% if "placeholder" in recipe.featured_image.url %}
                 <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143581/default_image_hgtqbs.png"
                     alt="A plate with macarons">
@@ -72,13 +16,13 @@
                 {% endif %}
                 <div class="card-body">
                     <h6 class="text-muted">By {{ recipe.author }} |
-                        {{ recipe.date_created_on|date:"Y-m-d" }} <i class="fa-solid fa-thumbs-up"></i>
+                        {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
                         {{ recipe.number_of_likes }}</h6>
                     <h5 class="card-title text-uppercase">{{ recipe.title }}</h5>
                     <div class="text-muted">
                         <p class="card-text mb-3 fragment">{{ recipe.excerpt }}</p>
                         <p class="card-text">
-                            <a href="" class="btn btn-outline-secondary btn-sm">View Recipe</a>
+                            <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-outline-secondary btn-sm">View Recipe</a>
                             {% if user.id == post.author.id %}
                             <a href="" class="btn btn-outline-secondary btn-sm">Update</a>
                             <a href="" class="btn btn-danger btn-sm">Delete</a>

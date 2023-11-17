@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block content %}
+<!-- <div class="container">
+    <div class="card my-3">
+        <div class="row g-0">
+            <div class="col-md-8 flex align-items-center">
+                {% if "placeholder" in recipe.featured_image.url %}
+                <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143581/default_image_hgtqbs.png"
+                    class="card-img img-fluid rounded-start img-max-hgt" alt="A plate with macarons">
+                {% else %}
+                <img src="{{ recipe.featured_image.url }}" class="card-img img-fluid rounded-start"
+                    alt="Recipe image">
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <div class="card-body">
+                    <div class="my-3 mx-3">
+                        <h1 class="card-title">{{ recipe.title }}</h1>
+                        <p class="card-text"><small class="text-muted">By {{ recipe.author }} |
+                                {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
+                                {{ recipe.number_of_likes }}</small>
+                        </p>
+                        <hr>
+                        <p class="card-text">{{ recipe.excerpt }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="row align-items-center mt-4">
+        <!-- Title recipe with featured image and other info -->
+        <div class="card border-secondary">
+            <div class="card-body">
+                <h1 class="card-title">{{ recipe.title }}</h1>
+                <p class="card-text"><small class="text-muted">By {{ recipe.author }} |
+                        {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
+                        {{ recipe.number_of_likes }}</small>
+                </p>
+                <hr>
+                <p class="card-text">{{ recipe.excerpt }}</p>
+            </div>
+            {% if "placeholder" in recipe.featured_image.url %}
+            <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143581/default_image_hgtqbs.png"
+                alt="A plate with macarons">
+            {% else %}
+            <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="Recipe image">
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row align-items-center mt-4">
+        <div class="col-lg-6 col-md-6 col-sm-12 align-items-center">
+            <h1>Ingredients</h1>
+            <hr>
+            <p>{{ recipe.ingredients|safe }}</p>            
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 align-items-center">
+            <h1>Instructions</h1>
+            <hr>
+            <p>{{ recipe.description|safe }}</p>            
+        </div>
+    </div>
+</div>
+  
+
+<!-- Comments -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 card mb-4  mt-3 ">
+            <h2>Comments:</h2>
+            <div class="card-body">                
+                {% for comment in comments %}
+                <div class="comments" style="padding: 10px;">
+                    <p class="font-weight-bold">                        
+                        {{ comment.name }}
+                        <span class=" text-muted font-weight-normal">                           
+                            {{ comment.created_on }}
+                        </span> wrote:
+                    </p>                    
+                    {{ comment.body | linebreaks }}
+                </div>                
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+{% endblock content %}
