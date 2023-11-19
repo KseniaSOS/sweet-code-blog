@@ -45,7 +45,7 @@
                             <!-- iterates through category on website and filters based on selection -->
                             {% for category in category_list %}
                             <li class="nav-item">
-                                <a href="" style="color: #301B28;"
+                                <a href="/category/{{ category.category_name }}" style="color: #301B28;"
                                     class="dropdown-item">{{ category.category_name }}</a>
                             </li>
                             {% endfor %}
@@ -65,19 +65,18 @@
                             <li><a class="dropdown-item" style="color: #301B28;" href="">Admin Area</a></li>
                             {% endif %}
 
-                            <li><a class="dropdown-item" style="color: #301B28;" href="">Log Out</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'account_logout' %}">Log Out</a></li>
                         </ul>
                     </li>
-
                     {% else %}
-                    <li><a class="nav-link" href="">Log In / Sign Up</a></li>
+                    <li><a class="nav-link" href="{% url 'account_login' %}">Log In / Sign Up</a></li>
                 </ul>
             </div>
             {% endif %}
         </div>
     </nav>
 
-    <!-- Hero image and call to action is displayed only for users who are not logged in -->
+
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -133,10 +132,9 @@
         </button>
     </div>
 
-
     <main class="flex-shrink-0 main-bg">
         {% block content %}
-        <!-- Content Goes here -->
+        <!-- Recipe Content Goes here -->
         {% endblock content %}
     </main>
 
