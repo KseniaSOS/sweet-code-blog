@@ -53,13 +53,13 @@
             <h2>Comments:</h2>
             <div class="card-body">                
                 {% for comment in comments %}
-                <div class="comments" style="padding: 10px;">
+                <div class="comments border border-secondary rounded" style="padding: 10px;">
                     <p class="font-weight-bold">                        
                         {{ comment.name }}
                         <span class=" text-muted font-weight-normal">                           
                             {{ comment.created_on }}
-                        </span>                        
-                    </p>                                       
+                        </span>                                               
+                    </p>                                                                           
                     {{ comment.body | linebreaks }}
                 </div>                
                 {% endfor %}
@@ -68,14 +68,7 @@
         <!--Enter a Comment -->
         {% if user.is_authenticated %} 
         <div class="col-md-4 card mb-4 mt-5 py-3">
-            <div class="card-body">                
-                {% if commented %}
-                <div class="alert alert-success" role="alert">
-                    Your comment is awaiting approval
-                </div>
-                {% else %}
-                               
-
+            <div class="card-body">
                 <h3>Leave a comment:</h3>
                 <p>Posting as: {{ user.username }}</p>
                 <form method="post" style="margin-top: 1.3em;">
@@ -83,14 +76,19 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-signup btn-lg mt-3">Submit</button>
                 </form>
-                {% endif %}
-                
+                {% if commented %}
+                <div class="alert alert-success mt-3" role="alert">
+                    Your comment is awaiting approval
+                </div>                
+                {% endif %}                
             </div>
-        </div> 
+        </div>
+        {% else %}
+                <div class="alert alert-success text-center" role="alert">
+                    Log in to join the discussion!
+                </div> 
         {% endif %}       
     </div>
 </div>
-
-
 
 {% endblock content %}
