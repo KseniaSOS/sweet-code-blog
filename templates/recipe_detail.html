@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
+{% load crispy_forms_tags %}
+
 <div class="container">
     <div class="row mt-5">
         <div class="col-lg-4 col-md-12 col-12">
@@ -47,7 +49,7 @@
 <!-- Comments -->
 <div class="container">
     <div class="row">
-        <div class="col-md-8 card mb-4 mt-5">
+        <div class="col-md-8 card mb-4 mt-5 py-3">
             <h2>Comments:</h2>
             <div class="card-body">                
                 {% for comment in comments %}
@@ -62,7 +64,30 @@
                 </div>                
                 {% endfor %}
             </div>
-        </div>        
+        </div>
+        <!--Enter a Comment -->
+        {% if user.is_authenticated %} 
+        <div class="col-md-4 card mb-4 mt-5 py-3">
+            <div class="card-body">                
+                {% if commented %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting approval
+                </div>
+                {% else %}
+                               
+
+                <h3>Leave a comment:</h3>
+                <p>Posting as: {{ user.username }}</p>
+                <form method="post" style="margin-top: 1.3em;">
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-signup btn-lg mt-3">Submit</button>
+                </form>
+                {% endif %}
+                
+            </div>
+        </div> 
+        {% endif %}       
     </div>
 </div>
 
