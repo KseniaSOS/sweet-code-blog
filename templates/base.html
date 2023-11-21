@@ -60,7 +60,7 @@
                             {{ user }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" style="color: #301B28;" href="">Create New Recipe</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'create_recipe' %}">Create New Recipe</a></li>
                             <li><a class="dropdown-item" style="color: #301B28;" href="">View My Recipies</a></li>
 
                             {% if request.user.is_superuser %}

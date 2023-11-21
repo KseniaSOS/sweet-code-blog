@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Recipe, Category
-from .forms import CommentForm
+from .forms import CommentForm, CreateRecipeForm
 
 
 class RecipeList(generic.ListView):
@@ -81,3 +81,14 @@ class RecipeLike(View):
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
 
+class CreateRecipe(generic.CreateView):
+    """
+    This class allows all authenticated users to create and save a new recipe.
+    """
+    model = Recipe
+    form_class = CreateRecipeForm
+    template_name = 'create_recipe.html'
+
+    def form_valid(self, form):        
+        form.instance.author = self.request.user
+        return super().form_valid(form)

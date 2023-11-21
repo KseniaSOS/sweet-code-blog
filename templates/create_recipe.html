@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+
+<div class="container">
+    <div>
+        <h1 class="headline mt-4">Create new Recipe</h1>
+        <div>
+            <h2 class="headline-intro-text">Please use the form below to create your review.</h2>
+        </div>
+        <hr>
+    </div>
+    <form method="post" class="form-text" enctype="multipart/form-data" style="margin-top: 1.3em;">
+        {{ form|crispy }}
+        {% csrf_token %}        
+        <button type="submit" class="btn btn-signup btn-lg mt-3">Submit</button>
+    </form>
+</div>
+
+{% endblock content %}
