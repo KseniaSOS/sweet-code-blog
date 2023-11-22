@@ -89,6 +89,6 @@ class CreateRecipe(generic.CreateView):
     form_class = CreateRecipeForm
     template_name = 'create_recipe.html'
 
-    def form_valid(self, form):        
+    def create_recipe(request):        
         form.instance.author = self.request.user
-        return super().form_valid(form)
+        return render(request, 'sweetcode/create_recipe.html')
