@@ -8,18 +8,15 @@
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2 mb-4 border border-secondary rounded shadow" style="padding: 15px;">
             <div>
-                <h1 class="headline mt-4">Create new Recipe</h1>
-                <div>
-                    <p>Please use the form below to create your recipe</p>
-                </div>        
+                <h1 class="headline mt-4">Add a new category</h1>                       
             </div>
             <form method="POST" class="form-text" enctype="multipart/form-data" style="margin-top: 1.3em;">
-                {{ form|crispy }}
+                {{ category_form | crispy }}
                 {% csrf_token %}        
                 <button type="submit" class="btn btn-signup btn-lg mt-3">Submit</button>
-            </form>
+            </form>                           
         </div>    
     </div>
 </div>
 
-{% endblock content %}
+{% endblock %}

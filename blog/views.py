@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Recipe, Category
-from .forms import CommentForm, CreateRecipeForm
+from .forms import CommentForm, CreateRecipeForm, AddCategoryForm
 
 
 class RecipeList(generic.ListView):
@@ -92,3 +92,40 @@ class CreateRecipe(generic.CreateView):
     def create_recipe(request):        
         form.instance.author = self.request.user
         return render(request, 'sweetcode/create_recipe.html')
+
+        return HttpResponseRedirect(reverse('create_recipe'))
+
+
+class AddCategory(generic.CreateView):
+    """
+    This form allows admin create a new category"
+    """
+    model = Category
+    form_class = AddCategoryForm
+    template_name = 'add_category.html'
+
+    def get(self, request, *arg, **kwargs):
+        category = Category.objects.all()
+
+        return render(
+            request,
+            "add_category.html",
+            {
+                "category": category,
+                "category_form": AddCategoryForm()
+            },
+        )
+
+    def post(self, request, *arg, **kwargs):
+        category = Category.objects.all()
+
+        category_form = AddCategoryForm(data=request.POST)
+
+        if category_form.is_valid():
+            category = category_form.save(commit=False)
+            category.approved = False
+            category.save()            
+        else:
+            category_form = AddCategoryForm
+
+        return HttpResponseRedirect(reverse('add_category'))
