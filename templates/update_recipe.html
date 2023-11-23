@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %} 
+
+{% if user.id == recipe.author.id %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2 mb-4 border border-secondary rounded shadow" style="padding: 15px;">
+            <div>
+                <h1 class="headline mt-4">Update your Recipe</h1>
+                <div>
+                    <p>Please use the form below to update your recipe</p>
+                </div>
+            </div>
+            <form method="POST" class="form-text" enctype="multipart/form-data" style="margin-top: 1.3em;">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-secondary btn-sm mt-3">Update</button>
+            </form>           
+            
+        </div>
+    </div>
+</div>
+{% else %}
+<p class="access-denied card-text">You are not allowed here!</p>
+{% endif %}
+{% endif %}
+
+
+{% endblock content %}

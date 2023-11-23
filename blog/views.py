@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.utils.text import slugify
 from .models import Recipe, Category
 from .forms import CommentForm, CreateRecipeForm, AddCategoryForm
+from django.urls import reverse_lazy
 
 
 class RecipeList(generic.ListView):
@@ -79,7 +81,19 @@ class RecipeLike(View):
             recipe.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
-   
+
+
+class UserRecipeView(generic.ListView):
+    model = Recipe
+    template_name = 'user_recipes.html'
+
+    def get_queryset(self):
+        """
+        Help method to filter out author that is logged in user and order it
+        by date.
+        """
+        return Recipe.objects.filter(author=self.request.user.id).order_by('-created_on')
+
 
 class CreateRecipe(generic.CreateView):
     """
@@ -95,6 +109,7 @@ class CreateRecipe(generic.CreateView):
         recipe_form = CreateRecipeForm(data=request.POST)
         if recipe_form.is_valid():
             recipe_form.instance.author = request.user
+            recipe_form.instance.slug = slugify(recipe_form.instance.title)
             recipe = recipe_form.save(commit=False)
             recipe.approved = False
             recipe.save()            
@@ -103,6 +118,38 @@ class CreateRecipe(generic.CreateView):
 
         return HttpResponseRedirect(reverse('create_recipe'))
 
+
+class UpdateRecipe(generic.UpdateView):
+    """
+    This form allows user update own recipe"
+    """
+    model = Recipe
+    form_class = CreateRecipeForm
+    template_name = 'update_recipe.html'
+
+    
+    def post(self, request, *arg, **kwargs): 
+        
+        recipe_form = CreateRecipeForm(data=request.POST)
+        if recipe_form.is_valid():
+            recipe_form.instance.author = request.user
+            recipe_form.instance.slug = slugify(recipe_form.instance.title)
+            recipe = recipe_form.save(commit=False)
+            recipe.approved = False
+            recipe.save()            
+        else:
+            recipe_form = CreateRecipeForm
+
+        return HttpResponseRedirect(reverse('create_recipe'))
+
+
+class DeleteRecipe(generic.DeleteView):
+    """
+    This form allows user delete own recipe"
+    """
+    model = Recipe    
+    template_name = 'delete_recipe.html'   
+    success_url = reverse_lazy('user_recipes')
 
 class AddCategory(generic.CreateView):
     """
