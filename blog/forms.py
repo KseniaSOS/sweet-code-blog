@@ -2,6 +2,13 @@ from .models import Comment, Recipe, Category
 from django import forms
 from django_summernote.widgets import SummernoteWidget
 
+choices = Category.objects.all().values_list('category_name', 'category_name')
+
+choice_list = []
+
+for item in choices:
+    choice_list.append(item)
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -27,7 +34,7 @@ class CreateRecipeForm(forms.ModelForm):
 
         widgets = {
             'excerpt': SummernoteWidget(),
-            'category': forms.Select(
+            'category': forms.Select(choices=choice_list,
                 attrs={'class': 'form-select'}),
             'ingredients': SummernoteWidget(),
             'description': SummernoteWidget(),

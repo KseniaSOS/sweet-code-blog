@@ -79,19 +79,27 @@ class RecipeLike(View):
             recipe.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
-
+   
 
 class CreateRecipe(generic.CreateView):
     """
-    This class allows all authenticated users to create and save a new recipe.
+    This form allows user create a new recipe"
     """
     model = Recipe
     form_class = CreateRecipeForm
     template_name = 'create_recipe.html'
 
-    def create_recipe(request):        
-        form.instance.author = self.request.user
-        return render(request, 'sweetcode/create_recipe.html')
+    
+    def post(self, request, *arg, **kwargs): 
+        
+        recipe_form = CreateRecipeForm(data=request.POST)
+        if recipe_form.is_valid():
+            recipe_form.instance.author = request.user
+            recipe = recipe_form.save(commit=False)
+            recipe.approved = False
+            recipe.save()            
+        else:
+            recipe_form = CreateRecipeForm
 
         return HttpResponseRedirect(reverse('create_recipe'))
 
