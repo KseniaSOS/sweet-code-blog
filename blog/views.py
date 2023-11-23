@@ -129,3 +129,11 @@ class AddCategory(generic.CreateView):
             category_form = AddCategoryForm
 
         return HttpResponseRedirect(reverse('add_category'))
+
+
+def CategoryView(request):
+    categorys = Category.objects.all()
+    context = {'categorys': categorys}
+    template = 'base.html'
+
+    return render(request, template, context)

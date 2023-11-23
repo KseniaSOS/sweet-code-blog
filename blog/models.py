@@ -26,7 +26,7 @@ class Recipe(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_recipes")
     updated_on = models.DateTimeField(auto_now=True)
-    category = models.ManyToManyField('Category', blank=True)
+    category = models.CharField(max_length=200, default='Uncategorized')
     cooking_time = models.IntegerField()
     ingredients = models.TextField()
     description = models.TextField()
