@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if category_recipes %}
+    <!-- All user recipes -->
+    <div class="container-fluid p-5">
+        <div class="row">        
+            <div>        
+                <h1 class="headline mt-4 mb-4"><strong>{{ cats }}</strong></h1>
+            <div>
+            {% for recipe in category_recipes %}
+            <div class="col-lg-3 mb-4">
+                <div class="card border-secondary shadow-sm p-3 mb-5 bg-body rounded border">
+                    {% if "placeholder" in recipe.featured_image.url %}
+                    <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143581/default_image_hgtqbs.png"
+                                alt="A plate with macarons">
+                    {% else %}
+                    <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="Recipe image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h6 class="text-muted">By {{ recipe.author }} | {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
+                            {{ recipe.number_of_likes }}</h6>
+                        <h5 class="card-title text-uppercase">{{ recipe.title }}</h5>
+                        <div class="text-muted">
+                            <p><strong>{{ recipe.category }}</strong></p>
+                            <p class="card-text mb-3 fragment">{{ recipe.excerpt }}</p>
+                            <p class="card-text">
+                                <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-outline-secondary btn-sm">View</a>
+                            </p>
+                        </div>                     
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                </div> 
+                <div class="row">
+                    <hr>
+                    {% endif %}                    
+                </div>           
+            </div> 
+            {% endfor %}              
+        </div>
+    </div>
+
+{% else %}
+    <div>
+        <h2 class="headline mx-4 my-3">Sorry... this page doesn't exist...</h2>
+    </div>
+{% endif %}
+{% endblock content %}

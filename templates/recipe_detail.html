@@ -26,10 +26,10 @@
                     <form class="d-inline" action="{% url 'recipe_like' recipe.slug %}" method="POST">
                         {% csrf_token %}
                         {% if liked %}
-                        <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i
+                        <button type="submit" name="blogpost_id" value="{{ recipe.slug }}" class="btn-like"><i
                                 class="fa-solid fa-thumbs-up"></i></button>
                         {% else %}
-                        <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i
+                        <button type="submit" name="blogpost_id" value="{{ recipe.slug }}" class="btn-like"><i
                                 class="fa-regular fa-thumbs-up fa-fade"></i></button>
                         {% endif %}
                     </form>

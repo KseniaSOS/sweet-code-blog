@@ -10,7 +10,15 @@ from django.urls import reverse_lazy
 class RecipeList(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.filter(status=1).order_by('-created_on')
+    category = Category.objects.all()
     template_name = 'index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(RecipeList, self).get_context_data(*args, **kwargs)
+        context['category_menu'] = category_menu
+
+        return context
 
 
 class RecipeDetail(View):
@@ -66,6 +74,7 @@ class RecipeDetail(View):
                 "comment_form": CommentForm()
             },
         )
+
 
 class RecipeLike(View):
     """
@@ -151,6 +160,7 @@ class DeleteRecipe(generic.DeleteView):
     template_name = 'delete_recipe.html'   
     success_url = reverse_lazy('user_recipes')
 
+
 class AddCategory(generic.CreateView):
     """
     This form allows admin create a new category"
@@ -186,9 +196,11 @@ class AddCategory(generic.CreateView):
         return HttpResponseRedirect(reverse('add_category'))
 
 
-def CategoryView(request):
-    categorys = Category.objects.all()
-    context = {'categorys': categorys}
-    template = 'base.html'
-
-    return render(request, template, context)
+def CategoryView(request, cats):
+    """
+    Function that filters category
+    https://shorturl.at/fhxyJ
+    """
+    category_recipes = Recipe.objects.filter(category=cats)
+    
+    return render(request, 'categories.html', {'cats':cats.title(), 'category_recipes':category_recipes})

@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" style="color: #301B28; font-family: 'Pacifico', cursive; font-size: 23px;"
-                href="{% url 'home'%}">Sweet Code Blog</a>
+                href="{% url 'home' %}">Sweet Code Blog</a>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
@@ -43,11 +43,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <!-- iterates through category on website and filters based on selection -->
-                            {% for category_name in categorys %}
+
+                            {% for item in category_menu %}
+                           
                             <li class="nav-item">
-                                <a href="" style="color: #301B28;"
+                                <a href="{% url 'category' item %}" style="color: #301B28;"
                                     class="dropdown-item" role="button">
-                                    {{ category.category_name }}
+                                    {{ item }}
                                 </a>
                             </li>
                             {% endfor %}
@@ -61,7 +63,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'create_recipe' %}">Create New Recipe</a></li>
-                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'user_recipes' %}">View My Recipies</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'user_recipes' %}">View My Recipes</a></li>
 
                             {% if request.user.is_superuser %}
                             <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'add_category' %}">Add New Category</a></li>                            
