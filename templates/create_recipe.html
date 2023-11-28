@@ -14,8 +14,8 @@
                 </div>        
             </div>
             <form method="POST" class="form-text" enctype="multipart/form-data" style="margin-top: 1.3em;">
-                {{ form|crispy }}
-                {% csrf_token %}        
+                {% csrf_token %} 
+                {{ form.as_p }}                       
                 <button type="submit" class="btn btn-signup btn-lg mt-3">Submit</button>
             </form>
         </div>    

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<!-- All user recipes -->
+All user recipes
 <div class="container-fluid p-5">
     <div class="row">
         {% if user.is_authenticated %}
@@ -30,7 +30,7 @@
                             {% if user.id == recipe.author.id %}
                             <a href="{% url 'update_recipe' recipe.slug %}" class="btn btn-outline-secondary btn-sm">Update</a>
                             <a href="{% url 'delete_recipe' recipe.slug %}" class="btn btn-outline-danger btn-sm">Delete</a>
-                        {% endif %}
+                            {% endif %}
                         </p>
                     </div>                     
                 </div>
@@ -42,6 +42,8 @@
                 {% endfor %}
             </div>           
         </div>
+        {% else %}
+        <p class="access-denied card-text">You are not allowed here!</p>
         {% endif %}        
     </div>
 </div>

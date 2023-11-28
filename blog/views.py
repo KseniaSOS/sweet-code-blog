@@ -7,24 +7,34 @@ from .forms import CommentForm, CreateRecipeForm, AddCategoryForm
 from django.urls import reverse_lazy
 
 
-class RecipeList(generic.ListView):
+class CategoryMenuMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(CategoryMenuMixin, self).get_context_data(**kwargs)
+        context['category_menu'] = Category.objects.all()
+        return context
+
+
+def CategoryView(request, cats):
+    category_recipes = Recipe.objects.filter(category=cats)
+    category_menu = Category.objects.all()
+    return render(request, 'categories.html', {
+        'cats': cats.title(),
+        'category_recipes': category_recipes,
+        'category_menu': category_menu
+    })
+
+
+class RecipeList(CategoryMenuMixin, generic.ListView):
     model = Recipe
     queryset = Recipe.objects.filter(status=1).order_by('-created_on')
     category = Category.objects.all()
     template_name = 'index.html'
 
-    def get_context_data(self, *args, **kwargs):
-        category_menu = Category.objects.all()
-        context = super(RecipeList, self).get_context_data(*args, **kwargs)
-        context['category_menu'] = category_menu
 
-        return context
-
-
-class RecipeDetail(View):
+class RecipeDetail(CategoryMenuMixin, View):
  
     def get(self, request, slug, *args, **kwargs):
-        queryset = Recipe.objects.filter(status=1)
+        queryset = Recipe.objects
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.comments.filter(approved=True).order_by("-created_on")        
         liked = False
@@ -36,10 +46,11 @@ class RecipeDetail(View):
             "recipe_detail.html",
             {
                 "recipe": recipe,
+                "slug": slug,
                 "comments": comments,
                 "commented": False,                
                 "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
             },
         )
 
@@ -71,7 +82,8 @@ class RecipeDetail(View):
                 "comments": comments,
                 "commented": True,             
                 "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "slug": slug,
             },
         )
 
@@ -92,19 +104,18 @@ class RecipeLike(View):
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
 
-class UserRecipeView(generic.ListView):
+class UserRecipeView(CategoryMenuMixin, generic.ListView):
     model = Recipe
     template_name = 'user_recipes.html'
-
+    queryset = Recipe.objects.order_by('-created_on')
+    
     def get_queryset(self):
-        """
-        Help method to filter out author that is logged in user and order it
-        by date.
-        """
-        return Recipe.objects.filter(author=self.request.user.id).order_by('-created_on')
+        queryset = Recipe.objects.filter(
+            author__id=self.request.user.id).order_by('-created_on')
+        return queryset
 
 
-class CreateRecipe(generic.CreateView):
+class CreateRecipe(CategoryMenuMixin, generic.CreateView):
     """
     This form allows user create a new recipe"
     """
@@ -128,7 +139,7 @@ class CreateRecipe(generic.CreateView):
         return HttpResponseRedirect(reverse('create_recipe'))
 
 
-class UpdateRecipe(generic.UpdateView):
+class UpdateRecipe(CategoryMenuMixin, generic.UpdateView):
     """
     This form allows user update own recipe"
     """
@@ -152,7 +163,7 @@ class UpdateRecipe(generic.UpdateView):
         return HttpResponseRedirect(reverse('create_recipe'))
 
 
-class DeleteRecipe(generic.DeleteView):
+class DeleteRecipe(CategoryMenuMixin, generic.DeleteView):
     """
     This form allows user delete own recipe"
     """
@@ -161,46 +172,14 @@ class DeleteRecipe(generic.DeleteView):
     success_url = reverse_lazy('user_recipes')
 
 
-class AddCategory(generic.CreateView):
+class AddCategory(CategoryMenuMixin, generic.CreateView):
     """
-    This form allows admin create a new category"
+    This form allows admin create a new category.
+    No need to override the get and post methods unless you have specific logic
+    that needs to be handled in these methods. The CreateView's default
+    implementation should suffice for typical use cases.
     """
     model = Category
     form_class = AddCategoryForm
     template_name = 'add_category.html'
-
-    def get(self, request, *arg, **kwargs):
-        category = Category.objects.all()
-
-        return render(
-            request,
-            "add_category.html",
-            {
-                "category": category,
-                "category_form": AddCategoryForm()
-            },
-        )
-
-    def post(self, request, *arg, **kwargs):
-        category = Category.objects.all()
-
-        category_form = AddCategoryForm(data=request.POST)
-
-        if category_form.is_valid():
-            category = category_form.save(commit=False)
-            category.approved = False
-            category.save()            
-        else:
-            category_form = AddCategoryForm
-
-        return HttpResponseRedirect(reverse('add_category'))
-
-
-def CategoryView(request, cats):
-    """
-    Function that filters category
-    https://shorturl.at/fhxyJ
-    """
-    category_recipes = Recipe.objects.filter(category=cats)
-    
-    return render(request, 'categories.html', {'cats':cats.title(), 'category_recipes':category_recipes})
+    success_url = reverse_lazy('home')  
