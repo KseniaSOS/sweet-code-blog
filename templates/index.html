@@ -20,7 +20,7 @@
                         {{ recipe.number_of_likes }}</h6>
                     <h5 class="card-title text-uppercase">{{ recipe.title }}</h5>
                     <div class="text-muted">
-                        <a href="{% url 'category' recipe.category %}"><strong>{{ recipe.category }}</strong></a>
+                        <a href="{% url 'category' recipe.category %}" style="text-decoration: none; color: #b6452c; text-transform: capitalize;"><strong>{{ recipe.category }}</strong></a>
                         <p class="card-text mb-3 fragment">{{ recipe.excerpt }}</p>
                         <p class="card-text">
                             <a href="{% url 'recipe_detail' recipe.slug %}"
