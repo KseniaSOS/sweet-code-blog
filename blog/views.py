@@ -105,6 +105,10 @@ class RecipeLike(View):
 
 
 class UserRecipeView(CategoryMenuMixin, generic.ListView):
+    """
+    This class filters out all the objects from the Recipe model where
+    the author is equal to the logged in user.
+    """
     model = Recipe
     template_name = 'user_recipes.html'
     queryset = Recipe.objects.order_by('-created_on')
@@ -117,7 +121,7 @@ class UserRecipeView(CategoryMenuMixin, generic.ListView):
 
 class CreateRecipe(CategoryMenuMixin, generic.CreateView):
     """
-    This form allows user create a new recipe"
+    This form allows user create a new recipe.
     """
     model = Recipe
     form_class = CreateRecipeForm
@@ -126,7 +130,7 @@ class CreateRecipe(CategoryMenuMixin, generic.CreateView):
     
     def post(self, request, *arg, **kwargs): 
         
-        recipe_form = CreateRecipeForm(data=request.POST)
+        recipe_form = CreateRecipeForm(request.POST, request.FILES)
         if recipe_form.is_valid():
             recipe_form.instance.author = request.user
             recipe_form.instance.slug = slugify(recipe_form.instance.title)
@@ -137,6 +141,16 @@ class CreateRecipe(CategoryMenuMixin, generic.CreateView):
             recipe_form = CreateRecipeForm
 
         return HttpResponseRedirect(reverse('create_recipe'))
+
+    def form_valid(self, form):
+        """
+        Help method to add author and slug to the Post model.
+        """
+
+        form.instance.author = self.request.user
+        form.instance.slug = slugify(form.instance.title)
+        return super().form_valid(form)
+        
 
 
 class UpdateRecipe(CategoryMenuMixin, generic.UpdateView):
@@ -165,7 +179,7 @@ class UpdateRecipe(CategoryMenuMixin, generic.UpdateView):
 
 class DeleteRecipe(CategoryMenuMixin, generic.DeleteView):
     """
-    This form allows user delete own recipe"
+    This form allows user delete own recipe.
     """
     model = Recipe    
     template_name = 'delete_recipe.html'   
