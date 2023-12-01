@@ -3,8 +3,10 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from .models import Recipe, Category
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import CommentForm, CreateRecipeForm, AddCategoryForm
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 
 class CategoryMenuMixin(object):
@@ -135,12 +137,14 @@ class CreateRecipe(CategoryMenuMixin, generic.CreateView):
             recipe_form.instance.author = request.user
             recipe_form.instance.slug = slugify(recipe_form.instance.title)
             recipe = recipe_form.save(commit=False)
-            recipe.approved = False
-            recipe.save()            
+            recipe.approved = False            
+            recipe.save()
+            messages.success(request, 'Your recipe has successfully been created and needs approval from admin!')
         else:
             recipe_form = CreateRecipeForm
 
-        return HttpResponseRedirect(reverse('create_recipe'))
+        return HttpResponseRedirect(reverse('user_recipes'))
+
 
     def form_valid(self, form):
         """
@@ -150,8 +154,7 @@ class CreateRecipe(CategoryMenuMixin, generic.CreateView):
         form.instance.author = self.request.user
         form.instance.slug = slugify(form.instance.title)
         return super().form_valid(form)
-        
-
+       
 
 class UpdateRecipe(CategoryMenuMixin, generic.UpdateView):
     """
@@ -170,11 +173,12 @@ class UpdateRecipe(CategoryMenuMixin, generic.UpdateView):
             recipe_form.instance.slug = slugify(recipe_form.instance.title)
             recipe = recipe_form.save(commit=False)
             recipe.approved = False
-            recipe.save()            
+            recipe.save()
+            messages.success(request, 'Your recipe has successfully been updated and needs approval from admin!')            
         else:
             recipe_form = CreateRecipeForm
 
-        return HttpResponseRedirect(reverse('create_recipe'))
+        return HttpResponseRedirect(reverse('user_recipes'))
 
 
 class DeleteRecipe(CategoryMenuMixin, generic.DeleteView):
@@ -184,6 +188,15 @@ class DeleteRecipe(CategoryMenuMixin, generic.DeleteView):
     model = Recipe    
     template_name = 'delete_recipe.html'   
     success_url = reverse_lazy('user_recipes')
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Delete method in the deleteview for displaying the success message.
+        https://rb.gy/icpfyv
+        """
+        msg = "Your Recipe has been deleted"
+        messages.add_message(self.request, messages.SUCCESS, msg)
+        return super(DeleteView, self).delete(request, *args, **kwargs)
 
 
 class AddCategory(CategoryMenuMixin, generic.CreateView):

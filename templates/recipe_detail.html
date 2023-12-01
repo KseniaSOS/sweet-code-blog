@@ -20,7 +20,7 @@
             <div class="card-body border">
                 <h1 class="card-title">{{ recipe.title }}</h1>
                 <p class="card-text"><small class="text-muted">By {{ recipe.author }} | {{ recipe.created_on|date }}</p>
-                <p><strong>{{ recipe.category }}</strong></p>    
+                <a href="{% url 'category' recipe.category %}" style="text-decoration: none; color: #b6452c; text-transform: capitalize;"><strong>{{ recipe.category }}</strong></a>    
                 <div>
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'recipe_like' recipe.slug %}" method="POST">
