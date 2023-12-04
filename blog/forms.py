@@ -42,6 +42,10 @@ class CreateRecipeForm(forms.ModelForm):
             'status': forms.Select(attrs={'class': 'form-select'}),
         }
         
+        labels = {
+            'cooking_time': 'Time in minutes',
+            'featured_image': 'Image [500x500 pixels 1:1]'
+        }
 
 class AddCategoryForm(forms.ModelForm):
     """

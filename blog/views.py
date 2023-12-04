@@ -26,6 +26,27 @@ def CategoryView(request, cats):
     })
 
 
+class AddCategory(CategoryMenuMixin, generic.CreateView):
+    """
+    This form allows admin create a new category.
+    No need to override the get and post methods unless you have specific logic
+    that needs to be handled in these methods. The CreateView's default
+    implementation should suffice for typical use cases.
+    """
+    model = Category
+    form_class = AddCategoryForm
+    template_name = 'add_category.html'
+    success_url = '/sweetcode/submit-success/'
+
+
+def category_submition(request):
+    """
+    A basic function that just returns category_submition.html to be rendered.
+    """
+
+    return render(request, 'category_submition.html')
+
+
 class RecipeList(CategoryMenuMixin, generic.ListView):
     model = Recipe
     queryset = Recipe.objects.filter(status=1).order_by('-created_on')
@@ -197,16 +218,3 @@ class DeleteRecipe(CategoryMenuMixin, generic.DeleteView):
         msg = "Your Recipe has been deleted"
         messages.add_message(self.request, messages.SUCCESS, msg)
         return super(DeleteView, self).delete(request, *args, **kwargs)
-
-
-class AddCategory(CategoryMenuMixin, generic.CreateView):
-    """
-    This form allows admin create a new category.
-    No need to override the get and post methods unless you have specific logic
-    that needs to be handled in these methods. The CreateView's default
-    implementation should suffice for typical use cases.
-    """
-    model = Category
-    form_class = AddCategoryForm
-    template_name = 'add_category.html'
-    success_url = reverse_lazy('home')  
