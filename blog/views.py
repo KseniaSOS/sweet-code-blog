@@ -47,6 +47,14 @@ def category_submition(request):
     return render(request, 'category_submition.html')
 
 
+def about(request):
+    """
+    A basic function that just returns about.html to be rendered.
+    """
+
+    return render(request, 'about.html')
+
+
 class RecipeList(CategoryMenuMixin, generic.ListView):
     model = Recipe
     queryset = Recipe.objects.filter(status=1).order_by('-created_on')

@@ -16,7 +16,7 @@
                 <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="Recipe image">
                 {% endif %}
                 <div class="card-body">
-                    <h6 class="text-muted">By {{ recipe.author }} |
+                    <h6 class="text-muted">By <strong>{{ recipe.author }}</strong>  |
                         {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
                         {{ recipe.number_of_likes }}</h6>
                     <h5 class="card-title text-uppercase">{{ recipe.title }}</h5>

@@ -4,6 +4,7 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.RecipeList.as_view(), name='home'),
+    path('about.html', views.about, name='about'),
     path('create_recipe/', views.CreateRecipe.as_view(), name='create_recipe'),
     path('user_recipes/', views.UserRecipeView.as_view(), name='user_recipes'),
     path('add_category/', views.AddCategory.as_view(), name='add_category'),
