@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2 mb-4 border border-secondary rounded shadow" style="padding: 15px;">
+            <div>
+                <i class="fa-sharp fa-solid fa-circle-exclamation"></i>
+                <p class="card-text">Whoops!<br>404 Page Not Found</p>
+                <a href="{% url 'home'%}">Back to home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
