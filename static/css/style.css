@@ -12,9 +12,10 @@ h5,
 h6 {
     font-family: 'PT Serif', serif;
     font-weight: 400;
-    color: #523634;
-    text-align: center;
+    color: #523634;    
 }
+
+
 
 /* Navigation */
 
@@ -26,11 +27,24 @@ h6 {
 
 /* Carousel */
 
-.carousel-caption {
-    top: 20%;
+.hero-item {
+    height: 440px;
+}
+
+.hero-img {
+    height: 100%;
+    object-fit: cover;
+
+}
+
+.carousel-caption {    
+    top: 78%;
     transform: translateY(-50%);
     bottom: initial;
-    text-shadow: 2px 2px #523634;
+    text-shadow: -4px 1px 3px #523634;    
+}
+.carousel-caption h5 {
+    color:white;
 }
 
 /* Cards */
@@ -39,11 +53,18 @@ h6 {
     background-color: #ffeedc;
 }
 
+.card-body a {
+    text-transform: uppercase;
+    font-size: 20px;
+    text-decoration: none; 
+    color: #b6452c;
+}
+
 .card-text {
     font-family: 'PT Serif', serif;
+    color: #523634;
+    font-size: 20px;
     font-weight: 400;
-    font-size: 1em;
-    text-align: center;
 }
 
 /* Buttons */
@@ -51,10 +72,6 @@ h6 {
     color:#b6452c;
     font-size: 18px;    
     border-color: #523634;
-}
-
-.card-text {
-    color: #523634;
 }
 
 /* Footer */
@@ -73,4 +90,14 @@ footer .btn {
 
 .fa-brands {
     font-size: 40px;
+}
+
+@media screen and (max-width: 760px){
+    .carousel-caption h5{    
+        font-size: 25px;    
+    }
+
+    .carousel-caption p{    
+        font-size: 15px;    
+    }
 }
