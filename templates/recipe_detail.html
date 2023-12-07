@@ -21,7 +21,6 @@
                 <h1 class="card-title">{{ recipe.title }}</h1>
                 <a href="{% url 'category' recipe.category %}"><strong>{{ recipe.category }}</strong></a>
                 <p class="card-text"><small class="text-muted">By <strong>{{ recipe.author }}</strong> | {{ recipe.created_on|date }}</p>
-                    
                 <div>
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'recipe_like' recipe.slug %}" method="POST">
@@ -40,7 +39,7 @@
                     <span class="text-secondary">{{ recipe.number_of_likes }} </span>
                 </div>
                 <hr>
-                <p class="card-text"><strong>Cooking time: </strong>{{ recipe.cooking_time }} minutes</p>
+                <p class="card-text"><i class="fa-solid fa-clock"></i> <strong>Cooking time: </strong>{{ recipe.cooking_time }} minutes</p>
                 <p class="card-text">{{ recipe.excerpt }}</p>
             </div>
         </div>
