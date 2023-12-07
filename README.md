@@ -101,3 +101,36 @@ Models used (besides standard user model) in this project are:
 ![Wireframes](readme/assets/images/wireframes.png)
 
 </details><br/>
+
+## User Stories
+
+### Site User
+
+TABLE
+
+### Site Admin
+
+TABLE
+
+[Back to top](<#table-of-content>)
+
+## Site Structure
+
+[Back to top](<#table-of-content>)
+
+## Design Choices
+
+* ### Color Scheme
+
+![Color Palette image](readme/assets/images/coolors_palette.png)
+
+* ### Typography
+
+[Back to top](<#table-of-content>)
+
+# **Features**
+
+## **Existing Features**
+
+### **Navigation**
+

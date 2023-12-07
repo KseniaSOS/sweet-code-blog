@@ -34,7 +34,6 @@ h6 {
 .hero-img {
     height: 100%;
     object-fit: cover;
-
 }
 
 .carousel-caption {    
@@ -48,6 +47,11 @@ h6 {
 }
 
 /* Cards */
+
+img {
+    width: 100%; 
+    height: auto;
+}
 
 .card-body {
     background-color: #ffeedc;
