@@ -87,6 +87,10 @@ footer p {
     color: #523634;
 }
 
+footer .name {
+    color: #b6452c;
+}
+
 footer .btn {
     border: none;
     color: #523634;
