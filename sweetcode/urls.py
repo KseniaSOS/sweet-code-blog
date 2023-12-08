@@ -22,3 +22,5 @@ urlpatterns = [
     path('', include('blog.urls'), name='blog_urls'),
     path('accounts/', include('allauth.urls')),
 ]
+
+handler404 = "sweetcode.views.page_not_found"
