@@ -9,13 +9,6 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 
-class CategoryMenuMixin(object):
-    def get_context_data(self, **kwargs):
-        context = super(CategoryMenuMixin, self).get_context_data(**kwargs)
-        context['category_menu'] = Category.objects.all()
-        return context
-
-
 def CategoryView(request, cats):
     category_recipes = Recipe.objects.filter(category=cats)
     category_menu = Category.objects.all()
@@ -26,7 +19,7 @@ def CategoryView(request, cats):
     })
 
 
-class AddCategory(CategoryMenuMixin, generic.CreateView):
+class AddCategory(generic.CreateView):
     """
     This form allows admin create a new category.
     No need to override the get and post methods unless you have specific logic
@@ -55,14 +48,24 @@ def about(request):
     return render(request, 'about.html')
 
 
-class RecipeList(CategoryMenuMixin, generic.ListView):
+def category_menu_context_processor(request):
+    '''
+    A context processor provides category_menu(dropdown menu) across all templates.
+    '''
+
+    return {
+        'category_menu': Category.objects.all()
+    }
+
+
+class RecipeList(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.filter(approved=True).order_by('-created_on')
     category = Category.objects.all()
     template_name = 'index.html'
 
 
-class RecipeDetail(CategoryMenuMixin, View):
+class RecipeDetail(View):
  
     def get(self, request, slug, *args, **kwargs):
         queryset = Recipe.objects
@@ -135,7 +138,7 @@ class RecipeLike(View):
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
 
-class UserRecipeView(CategoryMenuMixin, generic.ListView):
+class UserRecipeView(generic.ListView):
     """
     This class filters out all the objects from the Recipe model where
     the author is equal to the logged in user.
@@ -150,7 +153,7 @@ class UserRecipeView(CategoryMenuMixin, generic.ListView):
         return queryset
 
 
-class CreateRecipe(CategoryMenuMixin, generic.CreateView):
+class CreateRecipe(generic.CreateView):
     """
     This form allows user create a new recipe.
     """
@@ -185,7 +188,7 @@ class CreateRecipe(CategoryMenuMixin, generic.CreateView):
         return super().form_valid(form)
        
 
-class UpdateRecipe(CategoryMenuMixin, UpdateView):
+class UpdateRecipe(UpdateView):
     """
     This form allows user update own recipe"
     """
@@ -204,7 +207,7 @@ class UpdateRecipe(CategoryMenuMixin, UpdateView):
         return super(UpdateView, self).form_valid(form)
 
 
-class DeleteRecipe(CategoryMenuMixin, generic.DeleteView):
+class DeleteRecipe(generic.DeleteView):
     """
     This form allows user delete own recipe.
     """
