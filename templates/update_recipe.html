@@ -18,8 +18,8 @@
                 </div>
             </div>
             <form method="POST" class="form-text" enctype="multipart/form-data" style="margin-top: 1.3em;">
-                {{ form|crispy }}
-                {% csrf_token %}
+                {% csrf_token %} 
+                {{ form.as_p }}
                 <button type="submit" class="btn btn-outline-secondary btn-sm mt-3">Update</button>
             </form>           
             

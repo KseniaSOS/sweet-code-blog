@@ -57,7 +57,7 @@ def about(request):
 
 class RecipeList(CategoryMenuMixin, generic.ListView):
     model = Recipe
-    queryset = Recipe.objects.filter(status=1).order_by('-created_on')
+    queryset = Recipe.objects.filter(approved=True).order_by('-created_on')
     category = Category.objects.all()
     template_name = 'index.html'
 
@@ -185,29 +185,23 @@ class CreateRecipe(CategoryMenuMixin, generic.CreateView):
         return super().form_valid(form)
        
 
-class UpdateRecipe(CategoryMenuMixin, generic.UpdateView):
+class UpdateRecipe(CategoryMenuMixin, UpdateView):
     """
     This form allows user update own recipe"
     """
     model = Recipe
     form_class = CreateRecipeForm
     template_name = 'update_recipe.html'
+    success_url = reverse_lazy('user_recipes')
 
-    
-    def post(self, request, *arg, **kwargs): 
-        
-        recipe_form = CreateRecipeForm(data=request.POST)
-        if recipe_form.is_valid():
-            recipe_form.instance.author = request.user
-            recipe_form.instance.slug = slugify(recipe_form.instance.title)
-            recipe = recipe_form.save(commit=False)
-            recipe.approved = False
-            recipe.save()
-            messages.success(request, 'Your recipe has successfully been updated and needs approval from admin!')            
-        else:
-            recipe_form = CreateRecipeForm
-
-        return HttpResponseRedirect(reverse('user_recipes'))
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.slug = slugify(form.instance.title)        
+        form.instance.approved = False        
+        form.save()        
+        msg = "Your recipe has successfully been updated and needs approval from admin!"
+        messages.add_message(self.request, messages.SUCCESS, msg)
+        return super(UpdateView, self).form_valid(form)
 
 
 class DeleteRecipe(CategoryMenuMixin, generic.DeleteView):

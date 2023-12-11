@@ -15,10 +15,14 @@ class RecipeAdmin(SummernoteModelAdmin):
     list_filter = ('status', 'created_on')
     prepopulated_fields = {'slug': ('title',)}
     summernote_fields = ('ingredients', 'description',)
-    actions = ['approve_recipe']
+    actions = ['approve_recipe', 'unapprove']
 
     def approve_recipe(self, request, queryset):
         queryset.update(approved=True)
+
+
+    def unapprove(self, request, queryset):       
+        queryset.update(approved=False)
 
 
 @admin.register(Comment)

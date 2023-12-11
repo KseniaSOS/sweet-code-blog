@@ -90,7 +90,7 @@
                 <form method="post" style="margin-top: 1.3em;">
                     {{ comment_form | crispy }}
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-signup btn-lg mt-3">Submit</button>
+                    <button type="submit" class="btn btn-outline-secondary btn-sm mt-3">Submit</button>
                 </form>
                 {% if commented %}
                 <div class="alert alert-success mt-3" role="alert">
