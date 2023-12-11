@@ -30,7 +30,7 @@ class CreateRecipeForm(forms.ModelForm):
 
         model = Recipe
         fields = ('title', 'excerpt', 'featured_image', 'cooking_time',
-                  'category', 'ingredients', 'description',  'status',)
+                  'category', 'ingredients', 'description',)
 
         widgets = {
             'excerpt': SummernoteWidget(),

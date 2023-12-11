@@ -20,7 +20,7 @@
                     <div class="text-muted">
                         <a href="{% url 'category' recipe.category %}"><strong>{{ recipe.category }}</strong></a>
                         <p></p>
-                        <p class="card-text mb-3 fragment">{{ recipe.excerpt }}</p>
+                        <p class="card-text mb-3 fragment">{{ recipe.excerpt|safe }}</p>
                         <h6 class="text-muted">By {{ recipe.author }} |
                             {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
                             {{ recipe.number_of_likes }}

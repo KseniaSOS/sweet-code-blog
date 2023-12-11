@@ -142,11 +142,10 @@ class UserRecipeView(generic.ListView):
     """
     model = Recipe
     template_name = 'user_recipes.html'
-    queryset = Recipe.objects.order_by('-created_on')
+    queryset = Recipe.objects.filter(approved=True).order_by('-created_on')
     
     def get_queryset(self):
-        queryset = Recipe.objects.filter(
-            author__id=self.request.user.id).order_by('-created_on')
+        queryset = Recipe.objects.filter(approved=True).order_by('-created_on')
         return queryset
 
 
