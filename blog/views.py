@@ -36,7 +36,6 @@ def category_submition(request):
     """
     A basic function that just returns category_submition.html to be rendered.
     """
-
     return render(request, 'category_submition.html')
 
 
@@ -44,7 +43,6 @@ def about(request):
     """
     A basic function that just returns about.html to be rendered.
     """
-
     return render(request, 'about.html')
 
 
@@ -52,7 +50,6 @@ def category_menu_context_processor(request):
     '''
     A context processor provides category_menu(dropdown menu) across all templates.
     '''
-
     return {
         'category_menu': Category.objects.all()
     }

@@ -99,13 +99,3 @@ footer .btn {
 .fa-brands {
     font-size: 40px;
 }
-
-@media screen and (max-width: 760px){
-    .carousel-caption h5{    
-        font-size: 25px;    
-    }
-
-    .carousel-caption p{    
-        font-size: 15px;    
-    }
-}
