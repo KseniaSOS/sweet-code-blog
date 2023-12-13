@@ -10,7 +10,7 @@ from django.contrib import messages
 
 
 def CategoryView(request, cats):
-    category_recipes = Recipe.objects.filter(category=cats)
+    category_recipes = Recipe.objects.filter(approved=True, category=cats)
     category_menu = Category.objects.all()
     return render(request, 'categories.html', {
         'cats': cats.title(),
@@ -145,7 +145,7 @@ class UserRecipeView(generic.ListView):
     queryset = Recipe.objects.filter(approved=True).order_by('-created_on')
     
     def get_queryset(self):
-        queryset = Recipe.objects.filter(approved=True).order_by('-created_on')
+        queryset = Recipe.objects.filter(approved=True, author__id=self.request.user.id).order_by('-created_on')
         return queryset
 
 

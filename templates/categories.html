@@ -2,32 +2,37 @@
 
 {% block content %}
 {% if category_recipes %}
-    <!-- All user recipes -->
+    <!-- All user recipes depent on the category-->
     <div class="container-fluid p-3">
         <div class="row">
             <h1 class="headline mt-4 mb-4"><strong>{{ cats }}</strong></h1>            
             {% for recipe in category_recipes %}
-            <div class="col-lg-3 mb-4">
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-4 mt-2">
                 <div class="card border-secondary shadow-sm p-3 mb-5 bg-body rounded border">
                     {% if "placeholder" in recipe.featured_image.url %}
-                    <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1700143581/default_image_hgtqbs.png"
+                    <img src="https://res.cloudinary.com/dce4cgoe6/image/upload/v1701978138/default_image_mtlavz.jpg"
                                 alt="A plate with macarons">
                     {% else %}
                     <img src="{{ recipe.featured_image.url }}" class="card-img-top" alt="Recipe image">
                     {% endif %}
                     <div class="card-body">
-                        <h6 class="text-muted">By {{ recipe.author }} | {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
-                            {{ recipe.number_of_likes }}</h6>
-                        <h5 class="card-title text-uppercase">{{ recipe.title }}</h5>
+                        <h4 class="card-title text-uppercase">{{ recipe.title }}</h4>
                         <div class="text-muted">
-                            <p><strong>{{ recipe.category }}</strong></p>
-                            <p class="card-text mb-3 fragment">{{ recipe.excerpt }}</p>
+                            <a href="{% url 'category' recipe.category %}"><strong>{{ recipe.category }}</strong></a>
+                            <p></p>
+                            <p class="card-text mb-3 fragment">{{ recipe.excerpt|safe }}</p>
+                            <h6 class="text-muted">By {{ recipe.author }} | {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
+                                {{ recipe.number_of_likes }}
+                            </h6>
                             <p class="card-text">
-                                <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-outline-secondary btn-sm">View</a>
+                                <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-outline-secondary btn-sm">View Recipe</a>
                             </p>
-                        </div>                     
+                        </div>    
+                        
+                        
+                                         
                     </div>
-                    {% if forloop.counter|divisibleby:3 %}
+                    {% if forloop.counter|divisibleby:4 %}
                 </div> 
                 <div class="row">
                     <hr>
