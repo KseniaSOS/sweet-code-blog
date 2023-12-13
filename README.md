@@ -410,10 +410,11 @@ The sites incorporates flash messages and confirmation pages when an action has 
 
 ## **Features Left to Implement**
 
-*
-*
-*
-*
+* Create a Profile Page
+* Add admin panel to the website pages
+* List of Favorites Feature
+* Delete Account Feature
+* Retrieve Password Feature
 
 [Back to top](<#table-of-content>)
 
@@ -440,7 +441,7 @@ The sites incorporates flash messages and confirmation pages when an action has 
 * [Cloudinary](https://cloudinary.com/) - A service that hosts all static files in the project
 * [HTML Validation](https://validator.w3.org/) - Used to validate HTML code
 * [CSS Validation](https://jigsaw.w3.org/css-validator/) - Used to validate CSS code
-* [PEP8 Validation](http://pep8online.com/) - Used to validate Python code
+* [PEP8 Validation](https://pep8ci.herokuapp.com/) - Used to validate Python code
 * [SmartDraw](https://app.smartdraw.com/) - Used for creating the Model Schema
 * [Font Awesome](https://fontawesome.com/) - Used for icon features on the site
 * [Google Fonts](https://fonts.google.com/) -
@@ -472,9 +473,49 @@ used to import fonts for the website
 # Testing
 ## Testing User Stories
 
+ TABLE
 
+
+## Code Validation
+### Markup Validation
+
+ All HTML pages have been run through the [W3C html Validator](https://validator.w3.org/)
+
+<details><summary><b>HTML Validation Result</b></summary>
+
+![HTML Result Home Page](static/readme-images/html_validation.png)
+</details><br/>
+
+### CSS Validaton
+
+The CSS have been run through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/), which reports no errors.
+
+<details><summary><b>CSS Validation Result</b></summary>
+
+![CSS Result](static/readme-images/css_validation.png)
+</details><br/>
+
+### JavaScript Validation
+
+[JSHint](https://jshint.com/) was used to validate the JavaScript of the website, which consists only of one function at the end of the base.html files.
+
+<details><summary><b>JSHint Validation Result</b></summary>
+
+![JSHint Validation](static/readme-images/js_validation.png)
+</details><br/>
+
+### PEP Validation
+
+The Python code was tested using the [CI Python Linter](https://pep8ci.herokuapp.com/).
+
+<details><summary><b>PEP8 Validation Result</b></summary>
+
+![JSHint Validation](static/readme-images/pep8_validation.png)
+</details><br/>
 
 [Back to top](<#table-of-content>)
+
+
 
 # Deployment
 ## Deployment To Heroku
