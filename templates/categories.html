@@ -21,10 +21,10 @@
                         <a href="{% url 'category' recipe.category %}"><strong>{{ recipe.category }}</strong></a>
                         <p></p>
                         <p class="card-text mb-3 fragment">{{ recipe.excerpt|safe }}</p>
-                        <h6 class="text-muted">By {{ recipe.author }} | {{ recipe.created_on|date }} <i
+                        <p class="card-text">By {{ recipe.author }} | {{ recipe.created_on|date }} <i
                                 class="fa-solid fa-thumbs-up"></i>
                             {{ recipe.number_of_likes }}
-                        </h6>
+                        </p>
                         <p class="card-text">
                             <a href="{% url 'recipe_detail' recipe.slug %}"
                                 class="btn btn-outline-secondary btn-sm">View Recipe</a>

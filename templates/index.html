@@ -21,9 +21,9 @@
                         <a href="{% url 'category' recipe.category %}"><strong>{{ recipe.category }}</strong></a>
                         <p></p>
                         <p class="card-text mb-3 fragment">{{ recipe.excerpt|safe }}</p>
-                        <h6 class="text-muted">By <strong>{{ recipe.author }}</strong> |
+                        <p class="card-text">By <strong>{{ recipe.author }}</strong> |
                             {{ recipe.created_on|date }} <i class="fa-solid fa-thumbs-up"></i>
-                            {{ recipe.number_of_likes }}</h6>
+                            {{ recipe.number_of_likes }}</p>
                         <p></p>
                         <p class="card-text">
                             <a href="{% url 'recipe_detail' recipe.slug %}"
