@@ -1,6 +1,6 @@
-from .models import Comment, Recipe, Category
 from django import forms
 from django_summernote.widgets import SummernoteWidget
+from .models import Recipe, Category, Comment
 
 choices = Category.objects.all().values_list('category_name', 'category_name')
 
@@ -43,9 +43,10 @@ class CreateRecipeForm(forms.ModelForm):
         }
         
         labels = {
-            'cooking_time': 'Time in minutes',
+            'cooking_time': 'Cooking Time (in minutes)',
             'featured_image': 'Image [500x500 pixels 1:1]'
         }
+
 
 class AddCategoryForm(forms.ModelForm):
     """

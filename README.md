@@ -30,7 +30,7 @@
     * [About](<#about>)
     * [User Recipes](<#user-recipes>)
     * [Create Recipe](<#create-recipe>)        
-    * [Update / Delete Recipe] (#update-and-delete-recipe>)    
+    * [Update / Delete Recipe](<#update-and-delete-recipe>)    
     * [Category](<#category>)
     * [Add New Category](<#add-new-category>)    
     * [Sign Up](<#sign-up>)
@@ -109,7 +109,11 @@ The wireframes were produced in Balsamiq. There are frames for a full width disp
 
 <details><summary><b>Wireframes</b></summary>
 
-![Wireframes](readme/assets/images/wireframes.png)
+![Wireframes](static/readme-images/balsamiq_home_page.png)
+
+![Wireframes](static/readme-images/balsamiq_recipe_detail_view.png)
+
+![Wireframes](static/readme-images/balsamiq_recipe_form.png)
 
 </details><br/>
 
@@ -326,6 +330,7 @@ On this page the logged in users can update their own recipes. When the form is 
 
 ![Update Recipe](static/readme-images/update_recipe_form.png)
 ![Update Recipe-2](static/readme-images/update_recipe_form2.png)
+
 </details><br/>
 
 All recipes can be deleted, by their own author. The page is a confirmation, if User wants to delete the Recipe.
