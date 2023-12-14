@@ -9,6 +9,7 @@ choice_list = []
 for item in choices:
     choice_list.append(item)
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -38,7 +39,7 @@ class CreateRecipeForm(forms.ModelForm):
                 attrs={'class': 'form-select'}),
             'ingredients': SummernoteWidget(),
             'description': SummernoteWidget(),
-            'cooking_time': forms.NumberInput(),
+            'cooking_time': forms.NumberInput(attrs={'min': '1', 'max': '5000'}),
             'status': forms.Select(attrs={'class': 'form-select'}),
         }
         
