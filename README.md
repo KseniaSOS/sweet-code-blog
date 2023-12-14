@@ -75,7 +75,7 @@ The website owner's goal is to create a website where users can intuitively brow
 ## Project Management
 ### Github Board
 
-I've been using the project board in GitHub to keep my project together. It has been working really well and has helped me structure up my work a lot. GitHub was used to plan and organize my hole project and user stories.
+I've been using the [project board](https://github.com/users/KseniaSOS/projects/6) in GitHub to keep my project together. It has been working really well and has helped me structure up my work a lot. GitHub was used to plan and organize my hole project and user stories.
 
 <details><summary><b>Github Board</b></summary>
 
@@ -484,11 +484,11 @@ used to import fonts for the website
 ## Code Validation
 ### Markup Validation
 
- All HTML pages have been run through the [W3C html Validator](https://validator.w3.org/)
+The website Sweet Code Blog was valdated by [W3C html Validator](https://validator.w3.org/). The validation showed errors in the code of Summernote editor that was used on the site. Unsolved bug are described in [Known Bugs](<#known-bugs>) section. The rest of the pages were without errors.
 
 <details><summary><b>HTML Validation Result</b></summary>
 
-![HTML Result Home Page](static/readme-images/html_validation.png)
+![HTML Result Home Page](static/readme-images/summernote-bug.png)
 </details><br/>
 
 ### CSS Validaton
@@ -511,7 +511,13 @@ The CSS have been run through the [W3C CSS Validator](https://jigsaw.w3.org/css-
 
 ### PEP Validation
 
-The Python code was tested using the [CI Python Linter](https://pep8ci.herokuapp.com/).
+The Python code was tested using the [CI Python Linter](https://pep8ci.herokuapp.com/). I have tested the following Python files:
+
+* admin.py - No errors or warnings reported
+* forms.py - No errors or warnings reported
+* models.py - No errors or warnings reported
+* urls.py - No errors or warnings reported
+* views.py - No errors or warnings reported
 
 <details><summary><b>PEP8 Validation Result</b></summary>
 
@@ -520,6 +526,38 @@ The Python code was tested using the [CI Python Linter](https://pep8ci.herokuapp
 
 [Back to top](<#table-of-content>)
 
+## Additional Testing
+### Manual Testing
+
+TABLE
+
+### Responsiveness Test
+
+## Responsiveness Test
+
+* The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) and [Responsive Design Checker](https://www.responsivedesignchecker.com/).
+
+|        | Nexus 4 | Galaxy S5 | iPhone 3/4 | iPad Mini | iPad Pro | Display <1600px | Display >1600px |
+|--------|---------|-----------|------------|-----------|----------|-----------------|-----------------|
+| Render | pass    | pass      | pass       | pass      | pass     | pass            | pass            |
+| Images | pass    | pass      | pass       | pass      | pass     | pass            | pass            |
+| Links  | pass    | pass      | pass       | pass      | pass     | pass            | pass            |
+
+### Unfixed Bugs
+
+Bugs were found during the validation and a brief description is provided below:
+
+*  **Summernote bug** 
+
+Bug: When using the Summernote editor in a project, it turned out that it does not work properly. The problem is that when the user fills out the form, in this case creating a recipe, the program allows you to select font settings and so on. This creates to W3C validator errors as the program creates its own paragraph tags and style. This bug is still not fixed and I haven't found a solution yet.
+
+<details><summary><b>The W3C Markup Validator</b></summary>
+
+![Unfixed Summernote Bug](static/readme-images/summernote-bug.png)
+![Unfixed Summernote Bug](static/readme-images/summernote-bug2.png)
+</details><br />
+
+[Back to top](<#table-of-content>)
 
 
 # Deployment

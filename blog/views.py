@@ -48,7 +48,7 @@ def about(request):
 
 def category_menu_context_processor(request):
     '''
-    A context processor provides category_menu(dropdown menu) across all templates.
+    A context processor provides category(dropdown menu) across all templates.
     '''
     return {
         'category_menu': Category.objects.all()
@@ -63,14 +63,15 @@ class RecipeList(generic.ListView):
 
 
 class RecipeDetail(View):
- 
+
     def get(self, request, slug, *args, **kwargs):
         queryset = Recipe.objects
         recipe = get_object_or_404(queryset, slug=slug)
-        comments = recipe.comments.filter(approved=True).order_by("-created_on")        
+        comments = recipe.comments.filter(
+            approved=True).order_by("-created_on")
         liked = False
         if recipe.likes.filter(id=self.request.user.id).exists():
-            liked = True        
+            liked = True
 
         return render(
             request,
@@ -79,20 +80,20 @@ class RecipeDetail(View):
                 "recipe": recipe,
                 "slug": slug,
                 "comments": comments,
-                "commented": False,                
+                "commented": False,
                 "liked": liked,
                 "comment_form": CommentForm(),
             },
         )
 
-
     def post(self, request, slug, *args, **kwargs):
         queryset = Recipe.objects.filter(status=1)
         recipe = get_object_or_404(queryset, slug=slug)
-        comments = recipe.comments.filter(approved=True).order_by("-created_on")        
+        comments = recipe.comments.filter(
+            approved=True).order_by("-created_on")
         liked = False
         if recipe.likes.filter(id=self.request.user.id).exists():
-            liked = True  
+            liked = True
 
         comment_form = CommentForm(data=request.POST)
 
@@ -111,7 +112,7 @@ class RecipeDetail(View):
             {
                 "recipe": recipe,
                 "comments": comments,
-                "commented": True,             
+                "commented": True,
                 "liked": liked,
                 "comment_form": CommentForm(),
                 "slug": slug,
@@ -143,9 +144,12 @@ class UserRecipeView(generic.ListView):
     model = Recipe
     template_name = 'user_recipes.html'
     queryset = Recipe.objects.filter(approved=True).order_by('-created_on')
-    
+
     def get_queryset(self):
-        queryset = Recipe.objects.filter(approved=True, author__id=self.request.user.id).order_by('-created_on')
+        queryset = Recipe.objects.filter(
+            approved=True,
+            author__id=self.request.user.id
+        ).order_by('-created_on')
         return queryset
 
 
@@ -157,22 +161,21 @@ class CreateRecipe(generic.CreateView):
     form_class = CreateRecipeForm
     template_name = 'create_recipe.html'
 
-    
-    def post(self, request, *arg, **kwargs): 
-        
+    def post(self, request, *arg, **kwargs):
+
         recipe_form = CreateRecipeForm(request.POST, request.FILES)
         if recipe_form.is_valid():
             recipe_form.instance.author = request.user
             recipe_form.instance.slug = slugify(recipe_form.instance.title)
             recipe = recipe_form.save(commit=False)
-            recipe.approved = False            
+            recipe.approved = False
             recipe.save()
-            messages.success(request, 'Your recipe has successfully been created and needs approval from admin!')
+            messages.success(
+                request, 'Recipe created and pending admin approval!')
         else:
             recipe_form = CreateRecipeForm
 
         return HttpResponseRedirect(reverse('user_recipes'))
-
 
     def form_valid(self, form):
         """
@@ -182,7 +185,7 @@ class CreateRecipe(generic.CreateView):
         form.instance.author = self.request.user
         form.instance.slug = slugify(form.instance.title)
         return super().form_valid(form)
-       
+
 
 class UpdateRecipe(UpdateView):
     """
@@ -195,10 +198,10 @@ class UpdateRecipe(UpdateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.slug = slugify(form.instance.title)        
-        form.instance.approved = False        
-        form.save()        
-        msg = "Your recipe has successfully been updated and needs approval from admin!"
+        form.instance.slug = slugify(form.instance.title)
+        form.instance.approved = False
+        form.save()
+        msg = 'Your recipe updated and pending admin approval!'
         messages.add_message(self.request, messages.SUCCESS, msg)
         return super(UpdateView, self).form_valid(form)
 
@@ -207,8 +210,8 @@ class DeleteRecipe(generic.DeleteView):
     """
     This form allows user delete own recipe.
     """
-    model = Recipe    
-    template_name = 'delete_recipe.html'   
+    model = Recipe
+    template_name = 'delete_recipe.html'
     success_url = reverse_lazy('user_recipes')
 
     def delete(self, request, *args, **kwargs):

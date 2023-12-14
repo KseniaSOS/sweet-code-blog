@@ -22,9 +22,9 @@
 <body class="d-flex flex-column h-100 main-bg">
 
     <!-- Navigation -->
-   
+
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
-        <div class="container-fluid">            
+        <div class="container-fluid">
             <a class="navbar-brand" style="color: #301B28; font-family: 'Pacifico', cursive; font-size: 23px;"
                 href="{% url 'home' %}">Sweet Code Blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -49,31 +49,35 @@
                             <!-- iterates through category on website and filters based on selection -->
 
                             {% for item in category_menu %}
-                           
+
                             <li class="nav-item">
-                                <a href="{% url 'category' item %}" style="color: #301B28;"
-                                    class="dropdown-item" role="button">
+                                <a href="{% url 'category' item %}" style="color: #301B28;" class="dropdown-item"
+                                    role="button">
                                     {{ item }}
                                 </a>
                             </li>
                             {% endfor %}
                         </ul>
-
-                        {% if user.is_authenticated %}
+                    </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="color: #301B28;" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             {{ user }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'create_recipe' %}">Create New Recipe</a></li>
-                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'user_recipes' %}">View My Recipes</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'create_recipe' %}">Create
+                                    New Recipe</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'user_recipes' %}">View My
+                                    Recipes</a></li>
 
                             {% if request.user.is_superuser %}
-                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'add_category' %}">Add New Category</a></li>                            
+                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'add_category' %}">Add New
+                                    Category</a></li>
                             {% endif %}
 
-                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'account_logout' %}">Log Out</a></li>
+                            <li><a class="dropdown-item" style="color: #301B28;" href="{% url 'account_logout' %}">Log
+                                    Out</a></li>
                         </ul>
                     </li>
                     {% else %}
@@ -82,7 +86,7 @@
             </div>
             {% endif %}
         </div>
-    </nav>   
+    </nav>
 
     <!-- Hero image -->
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -170,7 +174,7 @@
         <p class="name">Ksenia Sossin</p>
     </footer>
     <script>
-        setTimeout(function ()  {
+        setTimeout(function () {
             let messages = document.getElementById('msg');
             let alert = new bootstrap.Alert(messages);
             alert.close();

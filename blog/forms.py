@@ -35,14 +35,15 @@ class CreateRecipeForm(forms.ModelForm):
 
         widgets = {
             'excerpt': SummernoteWidget(),
-            'category': forms.Select(choices=choice_list,
-                attrs={'class': 'form-select'}),
+            'category': forms.Select(
+                choices=choice_list, attrs={'class': 'form-select'}),
             'ingredients': SummernoteWidget(),
             'description': SummernoteWidget(),
-            'cooking_time': forms.NumberInput(attrs={'min': '1', 'max': '5000'}),
+            'cooking_time': forms.NumberInput(
+               attrs={'min': '1', 'max': '5000'}),
             'status': forms.Select(attrs={'class': 'form-select'}),
         }
-        
+
         labels = {
             'cooking_time': 'Cooking Time (in minutes)',
             'featured_image': 'Image [500x500 pixels 1:1]'
@@ -54,7 +55,7 @@ class AddCategoryForm(forms.ModelForm):
     This class allowds admin to add a new category to the site.
     """
     class Meta:
-        model= Category
+        model = Category
         fields = ('category_name',)
 
         widgets = {

@@ -7,7 +7,8 @@ from django_summernote.admin import SummernoteModelAdmin
 class RecipeAdmin(SummernoteModelAdmin):
     """
     This class adds fields from the Recipe model to the admin
-    panel and performs a function like approving a recipe to a dropdown list of actions.
+    panel and performs a function like approving a recipe to
+    a dropdown list of actions.
     """
 
     list_display = ('title', 'slug', 'status', 'created_on', 'approved')
@@ -20,8 +21,7 @@ class RecipeAdmin(SummernoteModelAdmin):
     def approve_recipe(self, request, queryset):
         queryset.update(approved=True)
 
-
-    def unapprove(self, request, queryset):       
+    def unapprove(self, request, queryset):
         queryset.update(approved=False)
 
 
@@ -29,7 +29,8 @@ class RecipeAdmin(SummernoteModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     """
     This class adds fields from the Comment model to the admin
-    panel and performs a function like approving a recipe to a dropdown list of actions.
+    panel and performs a function like approving a recipe to a
+    dropdown list of actions.
     """
     list_display = ('name', 'body', 'recipe', 'created_on', 'approved')
     list_filter = ('approved', 'created_on')
@@ -47,4 +48,3 @@ class CategoryAdmin(admin.ModelAdmin):
     panel
     """
     list_display = ('category_name',)
-   
