@@ -4,7 +4,7 @@
 
 **Developer: Ksenia Sossin**
 * [View Sweet Code Blog Repository](https://github.com/KseniaSOS/sweet-code-blog)
-* [View live website](https://.herokuapp.com/)
+* [View live website](https://sweet-code-blog-401a68287213.herokuapp.com/)
 
 
 # Table of Content
