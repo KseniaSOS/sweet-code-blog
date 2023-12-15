@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.text import slugify
 from .models import Recipe, Category
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -19,7 +20,7 @@ def CategoryView(request, cats):
     })
 
 
-class AddCategory(generic.CreateView):
+class AddCategory(LoginRequiredMixin, generic.CreateView):
     """
     This form allows admin create a new category.
     No need to override the get and post methods unless you have specific logic
@@ -153,7 +154,7 @@ class UserRecipeView(generic.ListView):
         return queryset
 
 
-class CreateRecipe(generic.CreateView):
+class CreateRecipe(LoginRequiredMixin, generic.CreateView):
     """
     This form allows user create a new recipe.
     """
@@ -187,7 +188,7 @@ class CreateRecipe(generic.CreateView):
         return super().form_valid(form)
 
 
-class UpdateRecipe(UpdateView):
+class UpdateRecipe(LoginRequiredMixin, UpdateView):
     """
     This form allows user update own recipe"
     """
@@ -206,7 +207,7 @@ class UpdateRecipe(UpdateView):
         return super(UpdateView, self).form_valid(form)
 
 
-class DeleteRecipe(generic.DeleteView):
+class DeleteRecipe(LoginRequiredMixin, generic.DeleteView):
     """
     This form allows user delete own recipe.
     """

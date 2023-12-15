@@ -95,7 +95,7 @@ Models used (besides standard user model) in this project are:
 
 <details><summary><b>Database Schema</b></summary>
 
-![Database Schema](readme/assets/images/database_schema.png)
+![Database Schema](static/readme-images/erd.png)
 
 </details><br/>
 
@@ -142,12 +142,11 @@ The wireframes were produced in Balsamiq. There are frames for a full width disp
 | As a Site Admin |  I can create, read, update and delete Recipes so that I can manage my blog content.| &check; |
 | As a Site Admin | I can create draft so that to finalize content writing at a later date. | &check; |
 | As a Site Admin | I can approve or disapprove comments so that I can filter out objectionable comments.| &check; |
-| As a Site Admin | As a Site Admin I can add a new category so that all users of the site could filter recipes on a particular category | &check; |
+| As a Site Admin | I can add a new category so that all users of the site could filter recipes on a particular category | &check; |
 | As a Site Admin | I can approve or disapprove recipes so that I can check the validity and the content of the recipes. | &check; |
 
 [Back to top](<#table-of-content>)
 
-## Site Structure
 ## Site Structure
 
 The Sweet Code Blog has an minimalistic, clean and intuitive design that makes the site easy to navigate for the user. The site is visible for two types of users: when **the user is logged out** and when **the user is logged in**.
@@ -478,7 +477,27 @@ used to import fonts for the website
 # Testing
 ## Testing User Stories
 
- TABLE
+|  | | |
+|:-------:|:--------|:--------|
+| As a Site User I can view a list of the recipes so that I can select one to read| Any user can go to the home page and see all publicly available recipes |
+| As a Site User I can I can click on a recipe so that I can read the full content| All recipes are displayed as cards with brief information and a recipe view button that allows any user to open a detailed recipe |
+| As a Site User I can easily create a profile so that I can post recipes to the blog, comment and like on other recipes| In the navigation bar the user can click the Login / Sign up link to either login or sign up for a new account |
+| As a Site User I can login to my registered account so that access create posts, the comment and like functionality| A registered user I can click the Login / Sign up link and easily log in |
+| As a Site User I can view recipes sorted by category so that I can narrow my search and focus on a particular category of personal interest. | There is a category link in the navigation bar so that each user can select a specific category. In addition, each recipe has a link to the category name by which you can also sort the recipes |
+| As a Site User I can view comments on an individual post so that I can read the conversation | When a user opens a detailed recipe, all comments can be viewed |
+| As a Site User I can view the number of likes on each recipe so that I can see which is the most popular or viral. |Likes can be seen on the  recipe cards and on the detailed recipe page |
+| As an authenticated  Site User  I can logout of my registered account so that keep my account safe from other users. | A a registered user will see a 'Log out' link in the navigation bar, click on this and a page opens which will request confirmation from the user to log out. |
+| As an authenticated  Site User I can like or unlike a recipe so that I can interact with the content | When the user is logged in it is possible to click on a thumps on the recipe detail page to like / unlike a recipe |
+| As an authenticated Site User I can view my personal page with recipes so that I can view my own content concisely and access it for the purpose of editing. | In the navigation bar is a 'view my recipes' link, where alle registered users can see all their recipes. There will be shown a list with recipe cards and three buttons : view recipe / update/ delete |
+| As an authenticated Site User I can leave comments on a recipe so that I can be involved in the conversation | Each page with detailed recipe has a comment section, if user is logged in, they can freely comment on recipe |
+| As an authenticated Site User I can create, read, update and delete my own Recipes so that I can contribute new content to the Sweet Code Blog and have a full control of my Recipes. | Every registered user can see the "Create New Recipe" link in the navigation bar that opens the form. After submitting the form, the user will receive a message that the recipe has been created and needs administrator approval. The "view my recipes" link allows the user to update or delete their published recipes |
+| As a Site Admin I can create, read, update and delete Recipes so that I can manage my blog content.| Creation / updation / deletion of own recipes can be made the same way as any logged in user. In the admin panel admin has the whole control of all recipes on the site |
+| As a Site Admin I can create draft so that to finalize content writing at a later date. | In the admin panel, admin has a possibility to set the status on the recipes either on published or draft |
+| As a Site Admin I can approve or disapprove comments so that I can filter out objectionable comments.| In the admin panel admin has the whole control of all recipes on the site. Admin can approve or unapprove comments |
+| As a Site Admin I can approve or disapprove recipes so that I can check the validity and the content of the recipes. | In the admin panel admin has the whole control of all recipes on the site. Admin can approve / unapprove / publish / unpublish recipes.   |
+| As a Site Admin  I can add a new category so that all users of the site could filter recipes on a particular category | As a logged in admin, there will be an 'add new category' link in the navbar, so admin can easily create a new category for the site, which doesn't need an extra approval from the admin panel |
+
+[Back to top](<#table-of-content>)
 
 
 ## Code Validation
@@ -543,19 +562,96 @@ TABLE
 | Images | pass    | pass      | pass       | pass      | pass     | pass            | pass            |
 | Links  | pass    | pass      | pass       | pass      | pass     | pass            | pass            |
 
+
+### Browser Compatibility
+
+* Google Chrome Version 
+* Apple Safari 
+* Microsoft Edge 
+
+[Back to top](<#table-of-content>)
+
+### Lighthouse
+
+Google Lighthouse was used to test website performance. Due to the large number and quality of images, performance usually receives a relatively poor rating on the mobile version. On the desktop version, all other parameters are highly rated.
+
+<details><summary><b>Lighthouse</b></summary>
+
+![Lighthouse](static/readme-images/lighthouse_home.png)
+
+![Lighthouse](static/readme-images/about.png)
+![Lighthouse](static/readme-images/lighthouse_recipe.png)
+</details><br />
+
+<details><summary><b>Lighthouse Mobile</b></summary>
+
+![Lighthouse-mobile](static/readme-images/lighthouse_mobile.png)
+</details><br />
+
+### WAVE
+
+[WAVE](https://wave.webaim.org/) was used to check accessibility. There are 2 Contrast Errors of caption on the hero image.
+
+<details><summary><b>WAVE Result</b></summary>
+
+![WAVE Result](static/readme-images/WAVE.png)
+</details><br/>
+
+
+## Known bugs
+### Fixed Bugs
+
+* Ecxerpt has html tags when submitting the recipe form.
+  * Add the helper method *save* to slugify and save the slug.
+
+    <details><summary><b>Excerpt bug</b></summary>
+
+    ![Excerpt bug](static/readme-images/excert-bug.png)
+    </details><br/>
+ 
+* Create a recipe page was displaying for unregistered users who accessed it with the URL directly.
+  * Add LoginRequiredMixin to all views that should be accessible only to users who are logged in.
+
+* The 'Category' dropdown menu would not populate on all pages.
+  * Add the following line of code to the context_processors in the settings.py file: 'blog.views.category_menu_context_processor'.
+
+* There was a bug with unapproved recipes, which were displayed on the home page.
+  * Add unapprove function to admin.py. Updated recipes schould be approved from admin panel. Just approved recipes will be displayed on the main recipe_list page (base.html).
+  
 ### Unfixed Bugs
 
 Bugs were found during the validation and a brief description is provided below:
 
-*  **Summernote bug** 
+* **Sign In page**
 
-Bug: When using the Summernote editor in a project, it turned out that it does not work properly. The problem is that when the user fills out the form, in this case creating a recipe, the program allows you to select font settings and so on. This creates to W3C validator errors as the program creates its own paragraph tags and style. This bug is still not fixed and I haven't found a solution yet.
+  Bug: the “forgot password” line on the login page was not removed, although it was removed from the template. I found a solution in Slack: django-allauth should be downgraded to django-allauth==0.51.0, promising that older versions of templates will not cause problems. But unfortunately I had another problem with WISGI and with the help of a tutor we were not able to solve this problem. So my project uses the new version of alluth and the line stays there. And if you don’t want to use “password reset” in future projects, then you need to use an older version of django-allauth.
 
-<details><summary><b>The W3C Markup Validator</b></summary>
+  <details><summary><b>Sig In page</b></summary>
 
-![Unfixed Summernote Bug](static/readme-images/summernote-bug.png)
-![Unfixed Summernote Bug](static/readme-images/summernote-bug2.png)
-</details><br />
+  ![Unfixed signin Bug](static/readme-images/sign_in.png)
+  </details><br />
+
+  <details><summary><b>django-allauth</b></summary>
+
+  ![Unfixed django allauth Bug](static/readme-images/django-allauth-0.51.png)
+  </details><br />
+
+  <details><summary><b>Wisgi bug</b></summary>
+
+  ![Unfixed django allauth Bug](static/readme-images/wisgi-bug.png)
+  </details><br />
+
+*  **Summernote** 
+
+    Bug: When using the Summernote editor in a project, it turned out that it does not work properly. The problem is that when the user fills out the form, in this case creating a recipe, the program allows you to select font settings and so on. This creates to W3C validator errors as the program creates its own paragraph tags and style. This bug is still not fixed and I haven't found a solution yet.
+
+    <details><summary><b>The W3C Markup Validator</b></summary>
+
+    ![Unfixed Summernote Bug](static/readme-images/summernote-bug.png)
+    ![Unfixed Summernote Bug](static/readme-images/summernote-bug2.png)
+    </details><br />
+
+  
 
 [Back to top](<#table-of-content>)
 
