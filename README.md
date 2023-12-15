@@ -1,6 +1,6 @@
 # *Sweet Code Blog*
 
-![Sweet Code Blog responsive design](static/readme-images/responsive.jpg)
+![Sweet Code Blog responsive design](static/readme-images/responsive.png)
 
 **Developer: Ksenia Sossin**
 * [View Sweet Code Blog Repository](https://github.com/KseniaSOS/sweet-code-blog)
@@ -42,7 +42,7 @@
 * [**Features Left To Implement**](<#features-left-to-implement>)
 
 * [**Testing**](<#testing>)
-    * [Testing User Stories](<#testing-user-stories>)
+    * [Manual Testing](<#manual-testing>)
     * [Code Validation](<#code-validation>)
     * [Additional Testing](<#additional-testing>)
     * [Known Bugs](<#known-bugs>)
@@ -257,7 +257,7 @@ All pages are accompanied by a carousel hero with a welcome text. The carousel a
 
 <details><summary><b>Hero image</b></summary>
 
-![Hero image](static/readme-images/hero_img.png)
+![Hero image](static/readme-images/hero-img.png)
 </details><br/>
 
 ### **Home**
@@ -475,7 +475,9 @@ used to import fonts for the website
 [Back to top](<#table-of-content>)
 
 # Testing
-## Testing User Stories
+## Manual Testing
+
+BDD, or Behaviour Driven Development, is the process used to test user stories in a non-technical way, allowing anyone to test the features of an app.
 
 |  | | |
 |:-------:|:--------|:--------|
@@ -546,13 +548,8 @@ The Python code was tested using the [CI Python Linter](https://pep8ci.herokuapp
 [Back to top](<#table-of-content>)
 
 ## Additional Testing
-### Manual Testing
-
-TABLE
 
 ### Responsiveness Test
-
-## Responsiveness Test
 
 * The responsive design tests were carried out manually with [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) and [Responsive Design Checker](https://www.responsivedesignchecker.com/).
 
@@ -590,11 +587,11 @@ Google Lighthouse was used to test website performance. Due to the large number 
 
 ### WAVE
 
-[WAVE](https://wave.webaim.org/) was used to check accessibility. There are 2 Contrast Errors of caption on the hero image.
-
+[WAVE](https://wave.webaim.org/) was used to check accessibility. 
+No errors found.
 <details><summary><b>WAVE Result</b></summary>
 
-![WAVE Result](static/readme-images/WAVE.png)
+![WAVE Result](static/readme-images/wave.png)
 </details><br/>
 
 
@@ -617,7 +614,20 @@ Google Lighthouse was used to test website performance. Due to the large number 
 
 * There was a bug with unapproved recipes, which were displayed on the home page.
   * Add unapprove function to admin.py. Updated recipes schould be approved from admin panel. Just approved recipes will be displayed on the main recipe_list page (base.html).
-  
+
+* Uploded images from the CreateRecipeForm didn't upload either from admin panel or from the site.
+  * Add *request.FILES* to CreateRecipe class in views.py.
+
+* There was a bug when by creating a recipe, author_id was not marked.
+  * Add *recipe_form.instance.author = request.user* to CreateRecipe class in views.py.
+  <details><summary><b>Author ID bug</b></summary>
+
+    ![Excerpt bug](static/readme-images/bug-authorId.png)
+    </details><br/>
+
+* After Wave test, there were two caption contrast errors.
+  * Add background to the captions.
+
 ### Unfixed Bugs
 
 Bugs were found during the validation and a brief description is provided below:
@@ -649,9 +659,7 @@ Bugs were found during the validation and a brief description is provided below:
 
     ![Unfixed Summernote Bug](static/readme-images/summernote-bug.png)
     ![Unfixed Summernote Bug](static/readme-images/summernote-bug2.png)
-    </details><br />
-
-  
+    </details><br />  
 
 [Back to top](<#table-of-content>)
 
@@ -747,14 +755,14 @@ You will need to install all of the packages listed in the requirements file you
 [Back to top](<#table-of-content>)
 
 # Credits
-* ## Content      
+
+**Content:**      
   * Recipes and text content of the site - **Ksenia Sossin**
   * Images - [DALL-E](https://openai.com/research/dall-e)
   * Images - [Midjourney](https://www.midjourney.com)
-
      
 
-* ## Media
+## Media
 
 Resources and inspiration came from a few sources:
 

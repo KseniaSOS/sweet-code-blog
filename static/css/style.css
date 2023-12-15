@@ -40,10 +40,15 @@ h6 {
     top: 78%;
     transform: translateY(-50%);
     bottom: initial;
-    text-shadow: -4px 1px 3px #523634;    
 }
 .carousel-caption h5 {
     color:white;
+}
+
+.carousel-caption {
+    background: rgb(101 28 28 / 38%); 
+    padding: 1rem; 
+    border-radius: 0.5rem; 
 }
 
 /* Cards */
